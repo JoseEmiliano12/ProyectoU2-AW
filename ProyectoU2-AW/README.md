@@ -16,8 +16,8 @@ Además, incluye un **dashboard con graficas visuales** sobre ventas y productos
 
 ## 🔗 Enlaces del proyecto
 - 📁 **Repositorio en GitHub:** 
-- 🌐 **Página web del proyecto:**
-- 🎥 **Canal de YouTube:** 
+- 🌐 **Página web del proyecto:*http://64.23.177.57/ProyectoU2-AW/ProyectoU2-AW/*
+- 🎥 **Canal de YouTube:*https://www.youtube.com/channel/UC0GLOFbNDN381Gul1M1l6mw* 
 
 ---
 

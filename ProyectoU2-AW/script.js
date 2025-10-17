@@ -1,124 +1,85 @@
-// Claves de almacenamiento
-const KEY_USUARIOS = "usuarios_upv";
-const KEY_SESION   = "upv_sesion";
+let productos = JSON.parse(localStorage.getItem("productos")) || [];
+let editIndex = null;
 
-// Utilidades de usuarios
-function obtenerUsuarios() {
-  return JSON.parse(localStorage.getItem(KEY_USUARIOS)) || [];
-}
-function guardarUsuarios(lista) {
-  localStorage.setItem(KEY_USUARIOS, JSON.stringify(lista));
-}
+const form = document.getElementById("productForm");
+const tbody = document.getElementById("tbodyProductos");
 
-// Validación: solo @gmail.com
-function esGmailValido(correo) {
-  if (!correo) return false;
-  // Acepta letras, números y caracteres comunes antes de @, y requiere dominio gmail.com
-  const regex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/i;
-  return regex.test(correo.trim().toLowerCase());
-}
-
-// -------- REGISTRO --------
-const registroForm = document.getElementById("registroForm");
-if (registroForm) {
-  registroForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const correo = document.getElementById("regCorreo").value.trim().toLowerCase();
-    const pass = document.getElementById("regPass").value;
-    const confirmar = document.getElementById("regConfirmar").value;
-
-    // Validaciones
-    if (!correo || !pass || !confirmar) {
-      alert("Completa todos los campos.");
-      return;
-    }
-    if (!esGmailValido(correo)) {
-      alert("Ingresa un correo válido @gmail.com.");
-      return;
-    }
-    if (pass.length < 6) {
-      alert("La contraseña debe tener al menos 6 caracteres.");
-      return;
-    }
-    if (pass !== confirmar) {
-      alert("Las contraseñas no coinciden.");
-      return;
-    }
-
-    const usuarios = obtenerUsuarios();
-    const existe = usuarios.find(u => u.correo === correo);
-    if (existe) {
-      alert("Ese correo ya está registrado.");
-      return;
-    }
-
-    usuarios.push({ correo, pass });
-    guardarUsuarios(usuarios);
-
-    alert("Registro exitoso. Inicia sesión.");
-    // Redirige al login
-    window.location.href = "index.html";
+function mostrarProductos() {
+  tbody.innerHTML = "";
+  productos.forEach((p, index) => {
+    const fila = `
+      <tr>
+        <td><img src="${p.imagen}" class="product-img"></td>
+        <td>${p.nombre}</td>
+        <td>${p.categoria}</td>
+        <td>$${p.precio.toFixed(2)}</td>
+        <td>${p.stock}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" onclick="editarProducto(${index})">Editar</button>
+          <button class="btn btn-danger btn-sm" onclick="eliminarProducto(${index})">Eliminar</button>
+        </td>
+      </tr>
+    `;
+    tbody.innerHTML += fila;
   });
 }
+mostrarProductos();
 
-// -------- LOGIN --------
-const loginForm = document.getElementById("loginForm");
-if (loginForm) {
-  loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    const correo = document.getElementById("loginEmail").value.trim().toLowerCase();
-    const pass = document.getElementById("loginPass").value;
+  const nombre = document.getElementById("nombre").value.trim();
+  const categoria = document.getElementById("categoria").value.trim();
+  const precio = parseFloat(document.getElementById("precio").value);
+  const stock = parseInt(document.getElementById("stock").value);
+  const imagen = document.getElementById("imagen").value.trim();
 
-    if (!correo || !pass) {
-      alert("Completa todos los campos.");
-      return;
-    }
-    if (!esGmailValido(correo)) {
-      alert("Ingresa un correo válido @gmail.com.");
-      return;
-    }
-
-    const usuarios = obtenerUsuarios();
-    const user = usuarios.find(u => u.correo === correo && u.pass === pass);
-
-    if (!user) {
-      alert("Correo o contraseña incorrectos.");
-      return;
-    }
-
-    // Guarda sesión y redirige a principal
-    localStorage.setItem(KEY_SESION, JSON.stringify({
-      correo,
-      loginAt: Date.now()
-    }));
-
-    window.location.href = "principal.html";
-  });
-}
-
-// -------- PROTECCIÓN DE PÁGINA PRINCIPAL --------
-(function protegerPrincipal() {
-  // Solo corre en principal.html si existen los elementos
-  const nombreSpan = document.getElementById("nombreUsuario");
-  const btnLogout  = document.getElementById("btnLogout");
-
-  if (!nombreSpan && !btnLogout) return;
-
-  const sesion = JSON.parse(localStorage.getItem(KEY_SESION) || "null");
-  if (!sesion || !sesion.correo) {
-    // Si no hay sesión, devuelve al login
-    window.location.href = "index.html";
+  // Validación
+  if (!nombre || !categoria || precio <= 0 || stock < 0 || !imagen) {
+    Swal.fire("Error", "Por favor, completa todos los campos correctamente.", "error");
     return;
   }
 
-  // Muestra el nombre (parte antes de @)
-  nombreSpan.textContent = sesion.correo.split("@")[0];
+  const nuevoProducto = { nombre, categoria, precio, stock, imagen };
 
-  // Logout
-  btnLogout.addEventListener("click", () => {
-    localStorage.removeItem(KEY_SESION);
-    window.location.href = "index.html";
+  if (editIndex === null) {
+    productos.push(nuevoProducto);
+    Swal.fire("Éxito", "Producto agregado correctamente.", "success");
+  } else {
+    productos[editIndex] = nuevoProducto;
+    editIndex = null;
+    Swal.fire("Actualizado", "Producto editado correctamente.", "info");
+  }
+
+  localStorage.setItem("productos", JSON.stringify(productos));
+  form.reset();
+  mostrarProductos();
+});
+
+function editarProducto(index) {
+  const p = productos[index];
+  document.getElementById("nombre").value = p.nombre;
+  document.getElementById("categoria").value = p.categoria;
+  document.getElementById("precio").value = p.precio;
+  document.getElementById("stock").value = p.stock;
+  document.getElementById("imagen").value = p.imagen;
+  editIndex = index;
+}
+
+function eliminarProducto(index) {
+  Swal.fire({
+    title: "¿Eliminar producto?",
+    text: "No podrás revertir esto.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Sí, eliminar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      productos.splice(index, 1);
+      localStorage.setItem("productos", JSON.stringify(productos));
+      mostrarProductos();
+      Swal.fire("Eliminado", "Producto eliminado correctamente.", "success");
+    }
   });
-})();
+}

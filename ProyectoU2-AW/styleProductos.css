@@ -1,0 +1,274 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background-color: #3B006D;
+  color: white;
+  padding: 15px;
+  position: fixed;
+  height: 100vh;
+}
+
+.sidebar-title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 17px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  display: block;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-footer {
+  position: absolute;
+  bottom: 20px;
+  width: calc(100% - 30px);
+}
+
+/* CONTENIDO */
+.content {
+  margin-left: 220px;
+  padding: 25px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.header h1 {
+  color: #333;
+  font-size: 26px;
+}
+
+.cart-icon {
+  position: relative;
+  font-size: 30px;
+  text-decoration: none;
+  color: #333;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 7px;
+  font-size: 11px;
+}
+
+.productos-container {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 20px;
+}
+
+/* TARJETAS */
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.card-title {
+  color: white;
+  background: #007bff;
+  padding: 10px;
+  border-radius: 5px;
+  margin: -20px -20px 15px -20px;
+  font-size: 16px;
+}
+
+/* FORMULARIO */
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* BOTONES */
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: black;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+/* FILTROS */
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.filters input,
+.filters select {
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  flex: 1;
+}
+
+/* TABLA */
+.table-container {
+  overflow-x: auto;
+}
+
+.productos-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.productos-table th {
+  padding: 10px;
+  text-align: left;
+  background-color: #f5f5f5;
+  border-bottom: 2px solid #ddd;
+  font-size: 14px;
+}
+
+.productos-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 13px;
+}
+
+.product-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.categoria-badge {
+  background-color: #17a2b8;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+}
+
+.stock-badge {
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+}
+
+.stock-disponible {
+  background-color: #28a745;
+  color: white;
+}
+
+.stock-bajo {
+  background-color: #ffc107;
+  color: black;
+}
+
+.stock-agotado {
+  background-color: #dc3545;
+  color: white;
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
+}
+
+@media (max-width: 1000px) {
+  .productos-container {
+    grid-template-columns: 1fr;
+  }
+}

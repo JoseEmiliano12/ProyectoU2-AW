@@ -1,0 +1,156 @@
+/* colores*/
+:root {
+  --morado: #2f0053;         
+  --azul: #125c88;            
+  --azul-oscuro: #0c3f5c;    
+  --rojo: #d82020;            
+  --fondo: #fff;             
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif; /* Fuente general */
+}
+
+body {
+  margin: 0;
+  min-height: 100vh; /* altura de la ventana */
+}
+
+/* Fondo */
+.bg {
+  background-color: var(--morado); /* Fondo morado */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* contenedor */
+.wrap {
+  display: grid; /* Dos columnas imagen y formulario */
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  width: 900px;
+  max-width: 95%;
+}
+
+/* Lado izquierdo logo y nombre */
+.side {
+  text-align: center;
+  color: white;
+}
+
+.logo {
+  width: 400px;          /* Tamaño de la imagen */
+  margin-bottom: 10px;
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Tarjetas del login y registro */
+.card {
+  background-color: var(--fondo);          /* Fondo blanco */
+  border-radius: 12px;                     /* Bordes redondeados */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25); /* Sombra suave */
+  padding: 35px;
+  text-align: center;
+}
+
+.ttl {
+  color: var(--morado);
+  margin-bottom: 25px;
+}
+
+/* Formulario */
+.form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+/*Botones*/
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;  /* Espacio entre botones */
+  margin-top: 10px;
+}
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s; /* color suave */
+}
+
+/* Botón principal entrar y registrarme */
+.btn-main {
+  background-color: var(--azul);
+  color: white;
+}
+
+.btn-main:hover {
+  background-color: var(--azul-oscuro);
+}
+
+/* Botones de registro y volver */
+.btn-alt {
+  background-color: var(--rojo);
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.btn-alt:hover {
+  filter: brightness(0.9);
+}
+
+/* Textos */
+.note {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.note a {
+  color: var(--azul);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.note a:hover {
+  text-decoration: underline;
+}
+
+/*Pie de pajina*/
+.foot {
+  text-align: center;
+  color: white;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+/*Responsive (para las pantallas pequeñas)*/
+@media (max-width: 800px) {
+  .wrap {
+    grid-template-columns: 1fr; /* Pone todo en una sola columna */
+  }
+
+  .logo {
+    width: 150px;
+  }
+
+  .card {
+    margin-top: 15px;
+  }
+}

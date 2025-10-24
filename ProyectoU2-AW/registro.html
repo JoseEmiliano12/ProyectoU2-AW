@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UPV-store | Registro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg">
+  <main class="wrap">
+    <aside class="side">
+      <img src="imagenes/pantera.png" alt="Pantera UPV" class="logo">
+      <h2 class="brand">UPV-store</h2>
+    </aside>
+
+    <section class="card">
+      <h1 class="ttl">Registro</h1>
+
+      <form id="registroForm" class="form" novalidate>
+        <input type="email" id="regCorreo" placeholder="Correo @gmail.com" required>
+        <input type="password" id="regPass" placeholder="Contraseña (mín. 6)" required>
+        <input type="password" id="regConfirmar" placeholder="Confirmar contraseña" required>
+
+        <div class="buttons center">
+          <button type="submit" class="btn btn-main">Registrarme</button>
+        </div>
+
+        <p class="note center">¿Ya tienes cuenta? <a href="index.html">Volver al login</a></p>
+      </form>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

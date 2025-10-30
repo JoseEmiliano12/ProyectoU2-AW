@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Sistema de Gestión</title>
+  <script src="proteccion.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="mstyle.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="d-flex">
+    <!-- sidebar -->
+    <div class="sidebar d-flex flex-column p-3 text-white">
+      <h5 class="mb-4 text-center">Sistema de Gestión</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a href="menu.html" class="nav-link text-white">Inicio</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="productos.html" class="nav-link text-white">Productos</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="pedidos.html" class="nav-link text-white">Pedidos</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="dashboard.html" class="nav-link active text-white">Dashboard</a>
+        </li>
+      </ul>
+      <div class="mt-auto">
+        <a href="#" class="nav-link text-white" id="btnLogout">Cerrar Sesión</a>
+      </div>
+    </div>
+
+    <!-- contenido principal -->
+    <div class="content flex-grow-1 p-4">
+      <div class="container-fluid">
+        <!-- header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2><strong>Dashboard</strong></h2>
+        </div>
+
+        <!-- estadisticas -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-3">
+            <div class="card text-center bg-primary text-white">
+              <div class="card-body">
+                <h5 id="totalProductos">0</h5>
+                <p>Productos</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-center bg-success text-white">
+              <div class="card-body">
+                <h5 id="totalPedidos">0</h5>
+                <p>Pedidos</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-center bg-info text-white">
+              <div class="card-body">
+                <h5 id="ingresosTotal">$0</h5>
+                <p>Ingresos</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-center bg-warning text-white">
+              <div class="card-body">
+                <h5 id="productosVendidos">0</h5>
+                <p>Productos Vendidos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- graficas -->
+        <div class="row">
+          <!-- productos mas vendidos -->
+          <div class="col-md-6">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title mb-3">
+                  Productos Más Vendidos
+                </h5>
+                <div class="chart-container">
+                  <canvas id="chartProductos"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ingresos por categoria -->
+          <div class="col-md-6">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title mb-3">
+                  Ingresos por Categoría
+                </h5>
+                <div class="chart-container">
+                  <canvas id="chartCategorias"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- tabla de resumen de productos -->
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title mb-3">
+                  Resumen de Productos
+                </h5>
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Unidades Vendidas</th>
+                        <th>Ingresos Generados</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tablaResumen">
+                      <tr>
+                        <td colspan="4" class="text-center text-muted">No hay datos disponibles</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

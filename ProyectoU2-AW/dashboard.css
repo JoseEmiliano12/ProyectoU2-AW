@@ -1,0 +1,68 @@
+/* Estilos específicos para el Dashboard */
+
+/* Contenedor de gráficas */
+.chart-container {
+  position: relative;
+  height: 350px;
+  margin-bottom: 20px;
+}
+
+/* Ajustes para las tarjetas del dashboard */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para las tarjetas de estadísticas */
+.card.bg-primary h5,
+.card.bg-success h5,
+.card.bg-info h5,
+.card.bg-warning h5 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.card.bg-primary p,
+.card.bg-success p,
+.card.bg-info p,
+.card.bg-warning p {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+/* Tabla de resumen */
+.table-responsive {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+/* Badge de categoría en la tabla */
+.badge {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+/* Responsive para gráficas */
+@media (max-width: 768px) {
+  .chart-container {
+    height: 250px;
+  }
+  
+  .card.bg-primary h5,
+  .card.bg-success h5,
+  .card.bg-info h5,
+  .card.bg-warning h5 {
+    font-size: 24px;
+  }
+}

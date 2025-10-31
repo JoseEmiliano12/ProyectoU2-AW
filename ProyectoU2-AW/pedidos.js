@@ -68,7 +68,6 @@ function mostrarProductos(listaFiltrada = productos) {
     const productoIndex = productos.indexOf(producto);
 
     const precioBase = Number(producto.precio) || 0;
-    const precioConIVA = precioBase * (1 + IVA);
     const imgSrc = producto.imagen || "img/placeholder.png";
     
     const card = document.createElement("div");
@@ -79,7 +78,7 @@ function mostrarProductos(listaFiltrada = productos) {
       <div class="producto-nombre">${producto.nombre}</div>
       <div class="producto-stock ${stockClass}">${stockText}</div>
       <div class="producto-precio">
-        $${precioConIVA.toFixed(2)} <small class="precio-iva">(c/IVA)</small>
+        $${precioBase.toFixed(2)} <small class="precio-iva">(+ IVA)</small>
       </div>
       <button class="btn-agregar" onclick="agregarAlCarrito(${productoIndex})" ${botonDisabled}>
         Agregar al Carrito
@@ -168,7 +167,7 @@ function actualizarCarrito() {
         <img src="${imgSrc}" class="carrito-item-img" alt="${item.nombre}">
         <div class="carrito-item-info">
           <div class="carrito-item-nombre">${item.nombre}</div>
-          <div class="carrito-item-precio">$${Number(item.precio).toFixed(2)} <small>s/IVA</small></div>
+          <div class="carrito-item-precio">$${Number(item.precio).toFixed(2)} <small>(s/IVA)</small></div>
           <div class="carrito-item-controls">
             <button class="btn-cantidad" onclick="cambiarCantidad(${index}, -1)" ${item.cantidad <= 1 ? 'disabled' : ''}>-</button>
             <div class="cantidad-display">${item.cantidad}</div>
